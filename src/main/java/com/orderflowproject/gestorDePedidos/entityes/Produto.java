@@ -1,0 +1,77 @@
+package com.orderflowproject.gestorDePedidos.entityes;
+
+import java.math.BigDecimal;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Produto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private String nome;
+	private String descricao;
+	private BigDecimal preco;
+	private Integer quantidade_estoque;
+	private String codigo_referencia;
+	private long categoria_id;
+
+	public Produto() {
+
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
+	public Integer getQuantidade_estoque() {
+		return quantidade_estoque;
+	}
+
+	public void setQuantidade_estoque(Integer quantidade_estoque) {
+		this.quantidade_estoque = quantidade_estoque;
+	}
+
+	public String getCodigo_referencia() {
+		return codigo_referencia;
+	}
+
+	public void setCodigo_referencia(String codigo_referencia) {
+		this.codigo_referencia = codigo_referencia;
+	}
+
+	public long getCategoria_id() {
+		return categoria_id;
+	}
+
+
+	
+
+}

@@ -19,17 +19,17 @@ public class Pedido {
 	private long forma_pagamento_id;
 	private String endereco_entrega;
 	private String telefone_cliente;
-	private Enum status;
+	private String status;
 	private LocalDate data_hora;
 	private String motivo_cancelamento;
-	
-	//Construtor Vazio
 
-	public  Pedido() {
+	// Construtor Vazio
+
+	public Pedido() {
 
 	}
-	
-	//Metodos Get e Set
+
+	// Metodos Get e Set
 
 	public long getId() {
 		return id;
@@ -72,11 +72,11 @@ public class Pedido {
 		this.telefone_cliente = telefone_cliente;
 	}
 
-	public Enum getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Enum status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
