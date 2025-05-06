@@ -24,7 +24,7 @@ public class PedidoProduto {
 	
 	//Metodos Get e Set
 
-	public long getId() {
+	public long getId()   {
 		return id;
 	}
 

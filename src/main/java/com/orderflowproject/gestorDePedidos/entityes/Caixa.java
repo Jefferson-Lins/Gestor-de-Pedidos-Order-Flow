@@ -21,7 +21,7 @@ public class Caixa {
 	private long funcionario_id;
 
 	// Construtor Vazio
-	public Caixa() {
+	public Caixa()  {
 
 	}
 

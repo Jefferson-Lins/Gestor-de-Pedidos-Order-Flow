@@ -19,7 +19,7 @@ public class Produto {
 	private String codigo_referencia;
 	private long categoria_id;
 
-	public Produto() {
+	public Produto()  {
 
 	}
 

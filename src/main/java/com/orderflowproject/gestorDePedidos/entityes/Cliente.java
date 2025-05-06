@@ -19,7 +19,7 @@ public class Cliente {
 	private String genero;
 
 	// Construtor Vazio
-	public Cliente() {
+	public Cliente()  {
 
 	}
 	// Metodos Get e Set

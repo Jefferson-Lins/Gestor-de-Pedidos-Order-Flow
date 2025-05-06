@@ -25,7 +25,7 @@ public class Pedido {
 
 	// Construtor Vazio
 
-	public Pedido() {
+	public Pedido()  {
 
 	}
 

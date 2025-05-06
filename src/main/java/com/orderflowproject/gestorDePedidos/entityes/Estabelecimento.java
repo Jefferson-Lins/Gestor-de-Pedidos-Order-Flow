@@ -18,7 +18,7 @@ public class Estabelecimento {
 	private String configuracoes;
 
 	// Construtor Vazio
-	public Estabelecimento() {
+	public Estabelecimento()  {
 
 	}
 	
