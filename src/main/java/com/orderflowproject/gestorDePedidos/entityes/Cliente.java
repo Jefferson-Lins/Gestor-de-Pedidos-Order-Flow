@@ -17,12 +17,20 @@ public class Cliente {
 	private String telefone;
 	private LocalDate data_nascimento;
 	private String genero;
-
-	// Construtor Vazio
+	
 	public Cliente()  {
 
 	}
-	// Metodos Get e Set
+	
+	public Cliente(String nome, String endereco, 
+			String telefone, LocalDate data_nascimento, String genero) {
+		super();
+		this.nome = nome;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.data_nascimento = data_nascimento;
+		this.genero = genero;
+	}
 
 	public long getId() {
 		return id;

@@ -16,6 +16,12 @@ public class CategoriaProduto {
 	public CategoriaProduto() {
 
 	}
+	
+	public CategoriaProduto(String nome, String descricao) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+	}
 
 	public long getId()  {
 		return id;

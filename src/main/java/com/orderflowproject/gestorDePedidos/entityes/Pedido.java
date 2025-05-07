@@ -22,15 +22,26 @@ public class Pedido {
 	private String status;
 	private LocalDate data_hora;
 	private String motivo_cancelamento;
-
-	// Construtor Vazio
-
+	
 	public Pedido()  {
 
 	}
-
-	// Metodos Get e Set
-
+	
+	public Pedido(long cliente_id, long estabelecimento_id, BigDecimal valor_total, long forma_pagamento_id,
+			String endereco_entrega, String telefone_cliente, String status, LocalDate data_hora,
+			String motivo_cancelamento) {
+		super();
+		this.cliente_id = cliente_id;
+		this.estabelecimento_id = estabelecimento_id;
+		this.valor_total = valor_total;
+		this.forma_pagamento_id = forma_pagamento_id;
+		this.endereco_entrega = endereco_entrega;
+		this.telefone_cliente = telefone_cliente;
+		this.status = status;
+		this.data_hora = data_hora;
+		this.motivo_cancelamento = motivo_cancelamento;
+	}
+	
 	public long getId() {
 		return id;
 	}

@@ -16,13 +16,22 @@ public class Estabelecimento {
 	private String telefone;
 	private String email;
 	private String configuracoes;
-
-	// Construtor Vazio
+	
 	public Estabelecimento()  {
 
 	}
-	
-	// Metodos Get e Set
+		
+	public Estabelecimento(String razao_social, String cnpj, String endereco, 
+			String telefone, String email,
+			String configuracoes) {
+		super();
+		this.razao_social = razao_social;
+		this.cnpj = cnpj;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.email = email;
+		this.configuracoes = configuracoes;
+	}
 
 	public long getId() {
 		return id;

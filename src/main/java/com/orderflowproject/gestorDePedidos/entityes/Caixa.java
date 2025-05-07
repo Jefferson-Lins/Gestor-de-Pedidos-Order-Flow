@@ -20,12 +20,20 @@ public class Caixa {
 	private String status;
 	private long funcionario_id;
 
-	// Construtor Vazio
 	public Caixa()  {
 
 	}
-
-	// Metodos Get e Set
+	
+	public Caixa(LocalDateTime data_abertura, LocalDateTime data_fechamento, BigDecimal valor_inicial,
+			BigDecimal valor_final, String status, long funcionario_id) {
+		super();
+		this.data_abertura = data_abertura;
+		this.data_fechamento = data_fechamento;
+		this.valor_inicial = valor_inicial;
+		this.valor_final = valor_final;
+		this.status = status;
+		this.funcionario_id = funcionario_id;
+	}
 
 	public long getId() {
 		return id;

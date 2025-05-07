@@ -22,6 +22,18 @@ public class Produto {
 	public Produto()  {
 
 	}
+	
+	public Produto(String nome, String descricao, BigDecimal preco, Integer quantidade_estoque,
+			String codigo_referencia, long categoria_id) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.quantidade_estoque = quantidade_estoque;
+		this.codigo_referencia = codigo_referencia;
+		this.categoria_id = categoria_id;
+	}
+
 
 	public long getId() {
 		return id;

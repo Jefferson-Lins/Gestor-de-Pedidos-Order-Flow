@@ -17,12 +17,19 @@ public class PedidoProduto {
 	private Integer quantidade;
 	private BigDecimal preco_unitario;
 
-	// Construtor Vazio
+	
 	public PedidoProduto() {
 
 	}
-	
-	//Metodos Get e Set
+		
+	public PedidoProduto(long pedido_id, long produto_id, 
+			Integer quantidade, BigDecimal preco_unitario) {
+		super();
+		this.pedido_id = pedido_id;
+		this.produto_id = produto_id;
+		this.quantidade = quantidade;
+		this.preco_unitario = preco_unitario;
+	}
 
 	public long getId()   {
 		return id;
