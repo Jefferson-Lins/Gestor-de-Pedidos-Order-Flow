@@ -1,5 +1,4 @@
 package com.orderflowproject.gestorDePedidos.entityes;
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -9,71 +8,83 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Cliente {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String nome;
-	private String endereco;
-	private String telefone;
-	private LocalDate data_nascimento;
-	private String genero;
-	
-	public Cliente()  {
 
-	}
-	
-	public Cliente(String nome, String endereco, 
-			String telefone, LocalDate data_nascimento, String genero) {
-		super();
-		this.nome = nome;
-		this.endereco = endereco;
-		this.telefone = telefone;
-		this.data_nascimento = data_nascimento;
-		this.genero = genero;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	public long getId() {
-		return id;
-	}
+    private String nome;
+    private String endereco;
+    private String telefone;
+    private LocalDate dataNascimento;
+    private String genero;
 
-	public String getNome() {
-		return nome;
-	}
+    public Cliente() {
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Cliente(String nome, String endereco, String telefone, LocalDate dataNascimento, String genero) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+    }
 
-	public String getEndereco() {
-		return endereco;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    public String getEndereco() {
+        return endereco;
+    }
 
-	public LocalDate getData_nascimento() {
-		return data_nascimento;
-	}
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-	public void setData_nascimento(LocalDate data_nascimento) {
-		this.data_nascimento = data_nascimento;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public String getGenero() {
-		return genero;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
 
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    // Opcional: equals/hashCode baseado no ID
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente)) return false;
+        Cliente cliente = (Cliente) o;
+        return id == cliente.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id);
+    }
 }

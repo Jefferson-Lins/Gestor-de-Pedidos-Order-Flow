@@ -1,5 +1,6 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,16 +14,15 @@ public class PermissaoAcesso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@ManyToOne
-	@JoinColumn(name = "perfilAcessoId", referencedColumnName = "id", nullable = false )
-	private PerfilAcesso perfilAcessoId;
+	@JoinColumn(name = "perfilAcesso_id", referencedColumnName = "id")
+	private PerfilAcesso perfilAcesso;
 	private String recurso;
 	private String acao;
 	
-	public PermissaoAcesso(PerfilAcesso perfilAcessoId, String recurso, String acao) {
+	public PermissaoAcesso(PerfilAcesso perfilAcesso, String recurso, String acao) {
 		super();
-		this.perfilAcessoId = perfilAcessoId;
+		this.perfilAcesso = perfilAcesso;
 		this.recurso = recurso;
 		this.acao = acao;
 	}
@@ -35,12 +35,12 @@ public class PermissaoAcesso {
 		return id;
 	}
 
-	public PerfilAcesso getPerfilAcessoId() {
-		return perfilAcessoId;
+	public PerfilAcesso getPerfilAcesso() {
+		return perfilAcesso;
 	}
 
-	public void setPerfilAcessoId(PerfilAcesso perfilAcessoId) {
-		this.perfilAcessoId = perfilAcessoId;
+	public void setPerfilAcesso(PerfilAcesso perfilAcesso) {
+		this.perfilAcesso = perfilAcesso;
 	}
 
 	public String getRecurso() {

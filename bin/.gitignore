@@ -58,3 +58,12 @@ build/
 hs_err_pid*
 replay_pid*
 >>>>>>> branch 'main' of https://github.com/Jefferson-Lins/Gestor-de-Pedidos-Order-Flow.git
+/.gitattributes
+/.gitignore
+/.metadata/
+/.mvn/
+/README.md
+/mvnw
+/mvnw.cmd
+/pom.xml
+/src/

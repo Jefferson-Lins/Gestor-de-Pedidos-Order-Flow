@@ -1,7 +1,7 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,15 +17,15 @@ public class TransacaoPagamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "pedidoId", referencedColumnName = "id", nullable = false )
-	private Pedido pedidoId;
+	@JoinColumn(name = "pedido_id", referencedColumnName = "id")
+	private Pedido pedido;
 	private BigDecimal valor;
 	@ManyToOne
-	@JoinColumn(name = "formaPagamentoId", referencedColumnName = "id", nullable = false )
-	private FormaPagamento formaPagamentoId;
+	@JoinColumn(name = "formaPagamento_id", referencedColumnName = "id")
+	private FormaPagamento formaPagamento;
 	private Status status;
 	private String codTransacao;
-	private LocalDateTime dataHora;
+	private Timestamp dataHora;
 	private String dataGetway;
 	
 	public enum Status {
@@ -33,13 +33,13 @@ public class TransacaoPagamento {
 		Capturado, Cancelado, Estornado, Expirado, ChargBack
 	}
 
-	public TransacaoPagamento(Long id, Pedido pedidoId, BigDecimal valor, FormaPagamento formaPagamentoId,
-			String codTransacao, LocalDateTime dataHora, String dataGetway) {
+	public TransacaoPagamento(Long id, Pedido pedido, BigDecimal valor, FormaPagamento formaPagamento,
+			String codTransacao, Timestamp dataHora, String dataGetway) {
 		super();
 		this.id = id;
-		this.pedidoId = pedidoId;
+		this.pedido = pedido;
 		this.valor = valor;
-		this.formaPagamentoId = formaPagamentoId;
+		this.formaPagamento = formaPagamento;
 		this.codTransacao = codTransacao;
 		this.dataHora = dataHora;
 		this.dataGetway = dataGetway;
@@ -53,12 +53,12 @@ public class TransacaoPagamento {
 		return id;
 	}
 
-	public Pedido getPedidoId() {
-		return pedidoId;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setPedidoId(Pedido pedidoId) {
-		this.pedidoId = pedidoId;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	public BigDecimal getValor() {
@@ -69,12 +69,12 @@ public class TransacaoPagamento {
 		this.valor = valor;
 	}
 
-	public FormaPagamento getFormaPagamentoId() {
-		return formaPagamentoId;
+	public FormaPagamento getFormaPagamento() {
+		return formaPagamento;
 	}
 
-	public void setFormaPagamentoId(FormaPagamento formaPagamentoId) {
-		this.formaPagamentoId = formaPagamentoId;
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
+		this.formaPagamento = formaPagamento;
 	}
 
 	public Status getStatus() {
@@ -89,11 +89,11 @@ public class TransacaoPagamento {
 		this.codTransacao = codTransacao;
 	}
 
-	public LocalDateTime getDataHora() {
+	public Timestamp getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(LocalDateTime dataHora) {
+	public void setDataHora(Timestamp dataHora) {
 		this.dataHora = dataHora;
 	}
 

@@ -1,7 +1,10 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,11 +26,11 @@ public class Funcionario {
 	@Column(unique = true)
 	private String usuario;
 	private String senha;
+	@Enumerated(EnumType.STRING)
 	private Funcao funcao;
-	
 	@ManyToOne
-	@JoinColumn(name = "perfilAcessoId", referencedColumnName = "id", nullable = false )
-	private PerfilAcesso perfilAcessoId;
+	@JoinColumn(name = "perfilAcesso_id", referencedColumnName = "id")
+	private PerfilAcesso perfilAcesso;
 	
 	public enum Funcao {
 		Cozinheiro, Gerente, Balconista,
@@ -39,7 +42,7 @@ public class Funcionario {
 	}
 
 	public Funcionario(String nome, String cpf, String email, String telefone, String endereco, String usuario,
-			String senha, Funcao funcao) {
+			String senha, Funcao funcao, PerfilAcesso perfilAcesso) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -49,6 +52,7 @@ public class Funcionario {
 		this.usuario = usuario;
 		this.senha = senha;
 		this.funcao = funcao;
+		this.perfilAcesso = perfilAcesso;
 	}
 	public Long getId() {
 		return id;
@@ -117,12 +121,12 @@ public class Funcionario {
 		this.funcao = funcao;
 	}
 
-	public PerfilAcesso getPerfilAcessoId() {
-		return perfilAcessoId;
+	public PerfilAcesso getPerfilAcesso() {
+		return perfilAcesso;
 	}
 
-	public void setPerfilAcessoId(PerfilAcesso perfilAcessoId) {
-		this.perfilAcessoId = perfilAcessoId;
+	public void setPerfilAcesso(PerfilAcesso perfilAcesso) {
+		this.perfilAcesso = perfilAcesso;
 	};
 	
 	

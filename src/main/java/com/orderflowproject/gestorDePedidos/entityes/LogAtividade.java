@@ -1,12 +1,11 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -15,24 +14,23 @@ public class LogAtividade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDateTime dataHora;
+	private Timestamp dataHora;
 	private String tipoAcao;
 	private String descricao;
 	@ManyToOne
-	@JoinColumn(name = "funcionarioId", referencedColumnName = "id", nullable = false )
-	private Funcionario funcionarioId;
+	private Funcionario funcionario;
 	private String ip;
 	private String dadosAdicionais;
 	public LogAtividade() {
 		super();
 	}
-	public LogAtividade(LocalDateTime dataHora, String tipoAcao, String descricao, Funcionario funcionarioId, String ip,
+	public LogAtividade(Timestamp dataHora, String tipoAcao, String descricao, Funcionario funcionario, String ip,
 			String dadosAdicionais) {
 		super();
 		this.dataHora = dataHora;
 		this.tipoAcao = tipoAcao;
 		this.descricao = descricao;
-		this.funcionarioId = funcionarioId;
+		this.funcionario = funcionario;
 		this.ip = ip;
 		this.dadosAdicionais = dadosAdicionais;
 	}
@@ -40,10 +38,10 @@ public class LogAtividade {
 		return id;
 	}
 	
-	public LocalDateTime getDataHora() {
+	public Timestamp getDataHora() {
 		return dataHora;
 	}
-	public void setDataHora(LocalDateTime dataHora) {
+	public void setDataHora(Timestamp dataHora) {
 		this.dataHora = dataHora;
 	}
 	public String getTipoAcao() {
@@ -58,11 +56,11 @@ public class LogAtividade {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Funcionario getFuncionarioId() {
-		return funcionarioId;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
-	public void setFuncionarioId(Funcionario funcionarioId) {
-		this.funcionarioId = funcionarioId;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 	public String getIp() {
 		return ip;

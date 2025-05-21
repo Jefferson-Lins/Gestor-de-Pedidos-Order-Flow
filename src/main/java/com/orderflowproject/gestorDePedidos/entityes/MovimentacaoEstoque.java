@@ -1,9 +1,10 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,14 +18,15 @@ public class MovimentacaoEstoque {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "produtoId", referencedColumnName = "id", nullable = false)
-	private Produto produtoId;
+	@JoinColumn(name = "produto_id", referencedColumnName = "id")
+	private Produto produto;
 	private Integer quantidade;
+	@Enumerated(EnumType.STRING)
 	private Tipo tipoMovimentacao;
 	private LocalDateTime dataHora;
 	@ManyToOne
-	@JoinColumn(name = "funcionarioId", referencedColumnName = "id", nullable = false)
-	private Funcionario funcionarioId;
+	@JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+	private Funcionario funcionario;
 	private String motivo;
 	
 	public enum Tipo {
@@ -32,14 +34,14 @@ public class MovimentacaoEstoque {
 		Entrada, Saída
 	}
 
-	public MovimentacaoEstoque(Produto produtoId, Integer quantidade, Tipo tipoMovimentacao, LocalDateTime dataHora,
-			Funcionario funcionarioId, String motivo) {
+	public MovimentacaoEstoque(Produto produto, Integer quantidade, Tipo tipoMovimentacao, LocalDateTime dataHora,
+			Funcionario funcionario, String motivo) {
 		super();
-		this.produtoId = produtoId;
+		this.produto = produto;
 		this.quantidade = quantidade;
 		this.tipoMovimentacao = tipoMovimentacao;
 		this.dataHora = dataHora;
-		this.funcionarioId = funcionarioId;
+		this.funcionario = funcionario;
 		this.motivo = motivo;
 	}
 
@@ -51,12 +53,12 @@ public class MovimentacaoEstoque {
 		return id;
 	}
 
-	public Produto getProdutoId() {
-		return produtoId;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setProdutoId(Produto produtoId) {
-		this.produtoId = produtoId;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public Integer getQuantidade() {
@@ -83,12 +85,12 @@ public class MovimentacaoEstoque {
 		this.dataHora = dataHora;
 	}
 
-	public Funcionario getFuncionarioId() {
-		return funcionarioId;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setFuncionarioId(Funcionario funcionarioId) {
-		this.funcionarioId = funcionarioId;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	public String getMotivo() {

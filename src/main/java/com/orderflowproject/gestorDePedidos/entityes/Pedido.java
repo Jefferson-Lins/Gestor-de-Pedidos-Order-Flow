@@ -1,110 +1,137 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Pedido {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private long cliente_id;
-	private long estabelecimento_id;
-	private BigDecimal valor_total;
-	private long forma_pagamento_id;
-	private String endereco_entrega;
-	private String telefone_cliente;
-	private String status;
-	private LocalDate data_hora;
-	private String motivo_cancelamento;
-	
-	public Pedido()  {
 
-	}
-	
-	public Pedido(long cliente_id, long estabelecimento_id, BigDecimal valor_total, long forma_pagamento_id,
-			String endereco_entrega, String telefone_cliente, String status, LocalDate data_hora,
-			String motivo_cancelamento) {
-		super();
-		this.cliente_id = cliente_id;
-		this.estabelecimento_id = estabelecimento_id;
-		this.valor_total = valor_total;
-		this.forma_pagamento_id = forma_pagamento_id;
-		this.endereco_entrega = endereco_entrega;
-		this.telefone_cliente = telefone_cliente;
-		this.status = status;
-		this.data_hora = data_hora;
-		this.motivo_cancelamento = motivo_cancelamento;
-	}
-	
-	public long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	public long getCliente_id() {
-		return cliente_id;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
 
-	}
+    @ManyToOne
+    @JoinColumn(name = "estabelecimento_id", nullable = false)
+    private Estabelecimento estabelecimento;
 
-	public long getEstabelecimento_id() {
-		return estabelecimento_id;
-	}
+    @Column(precision = 10, scale = 2, columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal valorTotal;
 
-	public BigDecimal getValor_total() {
-		return valor_total;
-	}
+    @ManyToOne
+    @JoinColumn(name = "forma_pagamento_id", nullable = false)
+    private FormaPagamento formaPagamento;
 
-	public void setValor_total(BigDecimal valor_total) {
-		this.valor_total = valor_total;
-	}
+    private String enderecoEntrega;
+    private String telefoneCliente;
+    private String status;
+    private LocalDateTime dataHora;
+    private String motivoCancelamento;
 
-	public long getForma_pagamento_id() {
-		return forma_pagamento_id;
-	}
+    // Construtor padrão obrigatório para JPA
+    public Pedido() {
+    }
 
-	public String getEndereco_entrega() {
-		return endereco_entrega;
-	}
+    public Pedido(Cliente cliente, Estabelecimento estabelecimento, BigDecimal valorTotal,
+                  FormaPagamento formaPagamento, String enderecoEntrega, String telefoneCliente,
+                  String status, LocalDateTime dataHora, String motivoCancelamento) {
+        this.cliente = cliente;
+        this.estabelecimento = estabelecimento;
+        this.valorTotal = valorTotal;
+        this.formaPagamento = formaPagamento;
+        this.enderecoEntrega = enderecoEntrega;
+        this.telefoneCliente = telefoneCliente;
+        this.status = status;
+        this.dataHora = dataHora;
+        this.motivoCancelamento = motivoCancelamento;
+    }
 
-	public void setEndereco_entrega(String endereco_entrega) {
-		this.endereco_entrega = endereco_entrega;
-	}
+    // Getters e Setters
 
-	public String getTelefone_cliente() {
-		return telefone_cliente;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setTelefone_cliente(String telefone_cliente) {
-		this.telefone_cliente = telefone_cliente;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public Estabelecimento getEstabelecimento() {
+        return estabelecimento;
+    }
 
-	public LocalDate getData_hora() {
-		return data_hora;
-	}
+    public void setEstabelecimento(Estabelecimento estabelecimento) {
+        this.estabelecimento = estabelecimento;
+    }
 
-	public void setData_hora(LocalDate data_hora) {
-		this.data_hora = data_hora;
-	}
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
 
-	public String getMotivo_cancelamento() {
-		return motivo_cancelamento;
-	}
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
 
-	public void setMotivo_cancelamento(String motivo_cancelamento) {
-		this.motivo_cancelamento = motivo_cancelamento;
-	}
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
 
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public String getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(String enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public String getTelefoneCliente() {
+        return telefoneCliente;
+    }
+
+    public void setTelefoneCliente(String telefoneCliente) {
+        this.telefoneCliente = telefoneCliente;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public String getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(String motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
+    }
 }

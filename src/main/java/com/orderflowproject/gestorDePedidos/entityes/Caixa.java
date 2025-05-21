@@ -7,68 +7,72 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Caixa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private LocalDateTime data_abertura;
-	private LocalDateTime data_fechamento;
-	private BigDecimal valor_inicial;
-	private BigDecimal valor_final;
+	private LocalDateTime dataAbertura;
+	private LocalDateTime dataFechamento;
+	private BigDecimal valorInicial;
+	private BigDecimal valorFinal;
 	private String status;
-	private long funcionario_id;
+	@ManyToOne
+	@JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+	private Funcionario funcionario;
 
 	public Caixa()  {
 
 	}
 	
-	public Caixa(LocalDateTime data_abertura, LocalDateTime data_fechamento, BigDecimal valor_inicial,
-			BigDecimal valor_final, String status, long funcionario_id) {
+	public Caixa(LocalDateTime dataAbertura, LocalDateTime dataFechamento, BigDecimal valorInicial,
+			BigDecimal valorFinal, String status, Funcionario funcionario) {
 		super();
-		this.data_abertura = data_abertura;
-		this.data_fechamento = data_fechamento;
-		this.valor_inicial = valor_inicial;
-		this.valor_final = valor_final;
+		this.dataAbertura = dataAbertura;
+		this.dataFechamento = dataFechamento;
+		this.valorInicial = valorInicial;
+		this.valorFinal = valorFinal;
 		this.status = status;
-		this.funcionario_id = funcionario_id;
+		this.funcionario = funcionario;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public LocalDateTime getData_abertura() {
-		return data_abertura;
+	public LocalDateTime getDataAbertura() {
+		return dataAbertura;
 	}
 
-	public void setData_abertura(LocalDateTime data_abertura) {
-		this.data_abertura = data_abertura;
+	public void setDataAbertura(LocalDateTime dataAbertura) {
+		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDateTime getData_fechamento() {
-		return data_fechamento;
+	public LocalDateTime getDataFechamento() {
+		return dataFechamento;
 	}
 
-	public void setData_fechamento(LocalDateTime data_fechamento) {
-		this.data_fechamento = data_fechamento;
+	public void setDataFechamento(LocalDateTime dataFechamento) {
+		this.dataFechamento = dataFechamento;
 	}
 
-	public BigDecimal getValor_inicial() {
-		return valor_inicial;
+	public BigDecimal getValorInicial() {
+		return valorInicial;
 	}
 
-	public void setValor_inicial(BigDecimal valor_inicial) {
-		this.valor_inicial = valor_inicial;
+	public void setValorInicial(BigDecimal valorInicial) {
+		this.valorInicial = valorInicial;
 	}
 
-	public BigDecimal getValor_final() {
-		return valor_final;
+	public BigDecimal getValorFinal() {
+		return valorFinal;
 	}
 
-	public void setValor_final(BigDecimal valor_final) {
-		this.valor_final = valor_final;
+	public void setValorFinal(BigDecimal valorFinal) {
+		this.valorFinal = valorFinal;
 	}
 
 	public String getStatus() {
@@ -79,8 +83,8 @@ public class Caixa {
 		this.status = status;
 	}
 
-	public long getFuncionario_id() {
-		return funcionario_id;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
 }

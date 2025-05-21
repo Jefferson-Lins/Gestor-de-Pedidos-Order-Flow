@@ -1,5 +1,6 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
+
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
@@ -8,77 +9,90 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 
 @Entity
 public class DisponibilidadeProduto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@ManyToOne
-	@JoinColumn(name = "produtoId", referencedColumnName = "id", nullable = false )
-	private Produto produtoId;
-	private DiaSemana diaSemana;
-	private boolean disponivel = true;
-	private LocalTime horarioInicio;
-	private LocalTime horarioFim;
-	
-	public enum DiaSemana {
-		Segunda, Terca, Quarta, Quinta, Sexta, Sabado, Domingo
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+    private Produto produto;
 
-	public DisponibilidadeProduto() {
-		super();
-	}
+    @Enumerated(EnumType.STRING) 
+    private DiaSemana diaSemana;
 
-	public DisponibilidadeProduto(Produto produtoId, boolean disponivel, LocalTime horarioInicio,
-			LocalTime horarioFim) {
-		super();
-		this.produtoId = produtoId;
-		this.disponivel = disponivel;
-		this.horarioInicio = horarioInicio;
-		this.horarioFim = horarioFim;
-	}
+    private boolean disponivel = true;
+    private LocalTime horarioInicio;
+    private LocalTime horarioFim;
 
-	public Long getId() {
-		return id;
-	}
+    
+    public enum DiaSemana {
+        Segunda, Terca, Quarta, Quinta, Sexta, Sabado, Domingo
+    }
 
-	public Produto getProdutoId() {
-		return produtoId;
-	}
+    
+    public DisponibilidadeProduto() {
+        super();
+    }
 
-	public void setProdutoId(Produto produtoId) {
-		this.produtoId = produtoId;
-	}
+    
+    public DisponibilidadeProduto(Produto produto, DiaSemana diaSemana, boolean disponivel, LocalTime horarioInicio,
+            LocalTime horarioFim) {
+        super();
+        this.produto = produto;
+        this.diaSemana = diaSemana;
+        this.disponivel = disponivel;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
+    }
 
-	public DiaSemana getDiaSemana() {
-		return diaSemana;
-	}
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
 
-	public boolean isDisponivel() {
-		return disponivel;
-	}
+    public Produto getProduto() {
+        return produto;
+    }
 
-	public void setDisponivel(boolean disponivel) {
-		this.disponivel = disponivel;
-	}
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
-	public LocalTime getHorarioInicio() {
-		return horarioInicio;
-	}
+    public DiaSemana getDiaSemana() {
+        return diaSemana;
+    }
 
-	public void setHorarioInicio(LocalTime horarioInicio) {
-		this.horarioInicio = horarioInicio;
-	}
+    public void setDiaSemana(DiaSemana diaSemana) {
+        this.diaSemana = diaSemana;
+    }
 
-	public LocalTime getHorarioFim() {
-		return horarioFim;
-	}
+    public boolean isDisponivel() {
+        return disponivel;
+    }
 
-	public void setHorarioFim(LocalTime horarioFim) {
-		this.horarioFim = horarioFim;
-	};
-		
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    public LocalTime getHorarioInicio() {
+        return horarioInicio;
+    }
+
+    public void setHorarioInicio(LocalTime horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public LocalTime getHorarioFim() {
+        return horarioFim;
+    }
+
+    public void setHorarioFim(LocalTime horarioFim) {
+        this.horarioFim = horarioFim;
+    }
 }
-
