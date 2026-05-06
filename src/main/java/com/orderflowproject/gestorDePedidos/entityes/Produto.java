@@ -6,88 +6,77 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "produto")
 public class Produto {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String nome;
-	private String descricao;
-	private BigDecimal preco;
-	private Integer qtdEstoque;
-	private String codigoReferencia;
-	@ManyToOne
-	@JoinColumn(name = "categoria_id", referencedColumnName = "id")
-	private CategoriaProduto categoria;
 
-	public Produto()  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	}
-	
-	public Produto(String nome, String descricao, BigDecimal preco, Integer qtdEstoque,
-			String codigoReferencia, CategoriaProduto categoria) {
-		super();
-		this.nome = nome;
-		this.descricao = descricao;
-		this.preco = preco;
-		this.qtdEstoque = qtdEstoque;
-		this.codigoReferencia = codigoReferencia;
-		this.categoria = categoria;
-	}
+    private String nome;
+    private String descricao;
+    private BigDecimal preco;
+    private Integer qtdEstoque;
+    private String codigoReferencia;
 
+    public Produto() {}
 
-	public long getId() {
-		return id;
-	}
+    public Produto(String nome, String descricao, BigDecimal preco, Integer qtdEstoque, String codigoReferencia) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.qtdEstoque = qtdEstoque;
+        this.codigoReferencia = codigoReferencia;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    // Getters e Setters
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public BigDecimal getPreco() {
-		return preco;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public Integer getQtdEstoque() {
-		return qtdEstoque;
-	}
+    public BigDecimal getPreco() {
+        return preco;
+    }
 
-	public void setQtdEstoque(Integer qtdEstoque) {
-		this.qtdEstoque = qtdEstoque;
-	}
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
 
-	public String getCodigoReferencia() {
-		return codigoReferencia;
-	}
+    public Integer getQtdEstoque() {
+        return qtdEstoque;
+    }
 
-	public void setCodigoReferencia(String codigoReferencia) {
-		this.codigoReferencia = codigoReferencia;
-	}
+    public void setQtdEstoque(Integer qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
+    }
 
-	public CategoriaProduto getCategoria() {
-		return categoria;
-	}
+    public String getCodigoReferencia() {
+        return codigoReferencia;
+    }
 
+    public void setCodigoReferencia(String codigoReferencia) {
+        this.codigoReferencia = codigoReferencia;
+    }
 
-	
-
+   
 }

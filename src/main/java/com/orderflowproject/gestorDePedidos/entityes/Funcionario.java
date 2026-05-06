@@ -1,133 +1,140 @@
 package com.orderflowproject.gestorDePedidos.entityes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "funcionario")
 public class Funcionario {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String nome;
-	@Column(unique = true)
-	private String cpf;
-	private String email;
-	private String telefone;
-	private String endereco;
-	@Column(unique = true)
-	private String usuario;
-	private String senha;
-	@Enumerated(EnumType.STRING)
-	private Funcao funcao;
-	@ManyToOne
-	@JoinColumn(name = "perfilAcesso_id", referencedColumnName = "id")
-	private PerfilAcesso perfilAcesso;
-	
-	public enum Funcao {
-		Cozinheiro, Gerente, Balconista,
-		AuxCozinha, Garçom, Entregador
-	}
 
-	public Funcionario() {
-		super();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Funcionario(String nome, String cpf, String email, String telefone, String endereco, String usuario,
-			String senha, Funcao funcao, PerfilAcesso perfilAcesso) {
-		super();
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-		this.telefone = telefone;
-		this.endereco = endereco;
-		this.usuario = usuario;
-		this.senha = senha;
-		this.funcao = funcao;
-		this.perfilAcesso = perfilAcesso;
-	}
-	public Long getId() {
-		return id;
-	}
-	public String getNome() {
-		return nome;
-	}
+    private String nome;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    @Column(unique = true, nullable = false, length = 14)
+    private String cpf;
 
-	public String getCpf() {
-		return cpf;
-	}
+    @Column(unique = true, nullable = false)
+    private String email;
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    private String telefone;
+    private String endereco;
 
-	public String getEmail() {
-		return email;
-	}
+    @Column(unique = true, nullable = false)
+    private String usuario;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    @Column(nullable = false)
+    private String senha;
 
-	public String getTelefone() {
-		return telefone;
-	}
+    private String funcao;
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estabelecimento_id", nullable = false)
+    @JsonIgnoreProperties({"funcionarios"})
+    private Estabelecimento estabelecimento;
 
-	public String getEndereco() {
-		return endereco;
-	}
+    public Funcionario() {}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
+    public Funcionario(String nome, String cpf, String email, String telefone,
+                       String endereco, String usuario, String senha,
+                       String funcao, Estabelecimento estabelecimento) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.funcao = funcao;
+        this.estabelecimento = estabelecimento;
+    }
 
-	public String getUsuario() {
-		return usuario;
-	}
+    // Getters e Setters
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Funcao getFuncao() {
-		return funcao;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setFuncao(Funcao funcao) {
-		this.funcao = funcao;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public PerfilAcesso getPerfilAcesso() {
-		return perfilAcesso;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setPerfilAcesso(PerfilAcesso perfilAcesso) {
-		this.perfilAcesso = perfilAcesso;
-	};
-	
-	
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getFuncao() {
+        return funcao;
+    }
+
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+
+    public Estabelecimento getEstabelecimento() {
+        return estabelecimento;
+    }
+
+    public void setEstabelecimento(Estabelecimento estabelecimento) {
+        this.estabelecimento = estabelecimento;
+    }
 }

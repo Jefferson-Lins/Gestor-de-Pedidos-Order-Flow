@@ -2,64 +2,73 @@ package com.orderflowproject.gestorDePedidos.entityes;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "pedido")
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id")
+    @JsonIgnoreProperties({"pedidos"})
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "estabelecimento_id", nullable = false)
+    @JoinColumn(name = "estabelecimento_id")
     private Estabelecimento estabelecimento;
 
-    @Column(precision = 10, scale = 2, columnDefinition = "DECIMAL(10,2)")
     private BigDecimal valorTotal;
-
-    @ManyToOne
-    @JoinColumn(name = "forma_pagamento_id", nullable = false)
-    private FormaPagamento formaPagamento;
-
     private String enderecoEntrega;
     private String telefoneCliente;
     private String status;
     private LocalDateTime dataHora;
     private String motivoCancelamento;
 
-    // Construtor padrão obrigatório para JPA
-    public Pedido() {
-    }
+    @ManyToMany
+    @JoinTable(
+        name = "pedido_produto",
+        joinColumns = @JoinColumn(name = "pedido_id"),
+        inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Produto> produtos = new ArrayList<>();
 
-    public Pedido(Cliente cliente, Estabelecimento estabelecimento, BigDecimal valorTotal,
-                  FormaPagamento formaPagamento, String enderecoEntrega, String telefoneCliente,
-                  String status, LocalDateTime dataHora, String motivoCancelamento) {
+    public Pedido() {}
+
+    public Pedido(Cliente cliente, BigDecimal valorTotal, String enderecoEntrega,
+                  String telefoneCliente, String status, LocalDateTime dataHora,
+                  String motivoCancelamento, Estabelecimento estabelecimento, List<Produto> produtos) {
         this.cliente = cliente;
-        this.estabelecimento = estabelecimento;
         this.valorTotal = valorTotal;
-        this.formaPagamento = formaPagamento;
         this.enderecoEntrega = enderecoEntrega;
         this.telefoneCliente = telefoneCliente;
         this.status = status;
         this.dataHora = dataHora;
         this.motivoCancelamento = motivoCancelamento;
+        this.estabelecimento = estabelecimento;
+        this.produtos = produtos != null ? produtos : new ArrayList<>();
     }
 
     // Getters e Setters
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -85,14 +94,6 @@ public class Pedido {
 
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
-    }
-
-    public FormaPagamento getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
-        this.formaPagamento = formaPagamento;
     }
 
     public String getEnderecoEntrega() {
@@ -133,5 +134,13 @@ public class Pedido {
 
     public void setMotivoCancelamento(String motivoCancelamento) {
         this.motivoCancelamento = motivoCancelamento;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

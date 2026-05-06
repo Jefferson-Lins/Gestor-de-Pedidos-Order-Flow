@@ -1,46 +1,57 @@
 package com.orderflowproject.gestorDePedidos.entityes;
-import jakarta.persistence.Column;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "estabelecimento")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Estabelecimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private String razaoSocial;
-
-    @Column(unique = true)
+    private String razaoSocial;   
     private String cnpj;
-
     private String endereco;
-    private String telefone;
-
-    @Column(unique = true)
+    private String telefone; 
     private String email;
-
-    // Pode conter JSON ou configuração em texto
-    @Column(length = 2048)
     private String configuracoes;
 
-    public Estabelecimento() {
-    }
+
+    @OneToMany(mappedBy = "estabelecimento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Funcionario> funcionarios = new ArrayList<>();
+
+    public Estabelecimento() {}
 
     public Estabelecimento(String razaoSocial, String cnpj, String endereco,
-                           String telefone, String email, String configuracoes) {
+                           String telefone, String email, String configuracoes,
+                           List<Pedido> pedidos, List<Funcionario> funcionarios) {
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.telefone = telefone;
         this.email = email;
         this.configuracoes = configuracoes;
+      
+        this.funcionarios = funcionarios != null ? funcionarios : new ArrayList<>();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -92,16 +103,12 @@ public class Estabelecimento {
         this.configuracoes = configuracoes;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Estabelecimento)) return false;
-        Estabelecimento that = (Estabelecimento) o;
-        return id == that.id;
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
     }
 
-    @Override
-    public int hashCode() {
-        return Long.hashCode(id);
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 }
